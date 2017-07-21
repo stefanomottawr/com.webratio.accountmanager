@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        id="com.webratio.accountmanager"
+        version="1.1.4">
+
+    <name>Account Manager</name>
+
+    <description>
+        A plugin for persisting credentials across app restarts and sharing them
+        with other apps.
+    </description>
+
+    <license>MIT</license>
+
+    <keywords>phonegap, account manager, keychain</keywords>
+
+    <js-module src="www/accountmanager.js" name="accountmanager">
+        <clobbers target="window.accountmanager"></clobbers>
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name = "AM">
+                <param name = "android-package" value="com.webratio.accountmanager.AM" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/AM.java" target-dir="src/com/webratio/accountmanager" />
+        <source-file src="src/android/Constants.java" target-dir="src/com/webratio/accountmanager" />
+		<source-file src="src/android/am_login_prompt.xml" target-dir="res/layout" />
+		
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="AM">
+                <param name="ios-package" value="AM" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/AM.h" />
+        <source-file src="src/ios/AM.m" />
+        <header-file src="src/ios/KeychainWrapper.h" />
+        <source-file src="src/ios/KeychainWrapper.m" />
+        <header-file src="src/ios/Account.h" />
+        <source-file src="src/ios/Account.m" />
+        <header-file src="src/ios/GlobalVars.h" />
+        <source-file src="src/ios/GlobalVars.m" />
+        <header-file src="src/ios/Constants.h" />
+        <framework src="Security.framework" />
+
+    </platform>
+    
+    <!-- wp8 -->
+    <platform name="wp8">
+        <config-file target="config.xml" parent="/*">
+            <feature name="AM">
+                <param name="wp-package" value="AM"/>
+            </feature>
+        </config-file>
+        <source-file src="src/wp/AM.cs" />
+    </platform>
+    
+    <!-- windows -->
+    <platform name="windows">
+        <js-module src="src/windows/AMProxy.js" name="AMProxy">
+            <merges target="" />
+        </js-module>
+    </platform>
+
+</plugin>
